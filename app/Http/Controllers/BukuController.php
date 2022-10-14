@@ -6,7 +6,7 @@ use App\Models\Buku;
 use Facade\FlareClient\Http\Response;
 Use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facade\Validator;
+use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpFoundation\Response as HttpFoundationResponse;
 
 class BukuController extends Controller
@@ -113,7 +113,7 @@ class BukuController extends Controller
      */
     public function destroy($id)
     {
-        $deletedRows = Buku::where('kode_buku', $id)->delete();
+        $deletedRows = Buku::where('id', $id)->delete();
         return response()->json([
             "success"  => true,
             "message" => "Data Buku berhasil dihapus",

@@ -19,3 +19,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::get('/book', [App\Http\Controllers\BukuController::class, 'index']);
+Route::get('/book_show/{id}', [App\Http\Controllers\BukuController::class, 'show']);
+Route::post('/book_create', [App\Http\Controllers\BukuController::class, 'store']);
+Route::post('/book_update/{id}', [App\Http\Controllers\BukuController::class, 'update']);
+Route::get('/book_delete/{id}', [App\Http\Controllers\BukuController::class, 'destroy']);

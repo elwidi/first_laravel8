@@ -17,5 +17,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/book', [App\Http\Controllers\BukuController::class, 'index']);
-Route::get('/book_show/{id}', [App\Http\Controllers\BukuController::class, 'show']);
+// Route::get('/book', [App\Http\Controllers\BukuController::class, 'index']);
+// Route::get('/book_show/{id}', [App\Http\Controllers\BukuController::class, 'show']);
+// Route::post('/book_create', [App\Http\Controllers\BukuController::class, 'store']);
