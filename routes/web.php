@@ -24,3 +24,7 @@ Route::post('custom-login', [App\Http\Controllers\CustomAuthController::class, '
 Route::get('registration', [App\Http\Controllers\CustomAuthController::class, 'registration'])->name('register-user');
 Route::post('custom-registration', [App\Http\Controllers\CustomAuthController::class, 'customRegistration'])->name('register.custom');
 Route::get('signout', [App\Http\Controllers\CustomAuthController::class, 'signOut'])->name('signout');
+
+Route::get('/demo', function () {
+    return view('demo');
+});
