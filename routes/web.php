@@ -28,3 +28,6 @@ Route::get('signout', [App\Http\Controllers\CustomAuthController::class, 'signOu
 Route::get('/demo', function () {
     return view('demo');
 });
+
+Route::get('my-home', [App\Http\Controllers\HomeController::class, 'myHome']);
+
