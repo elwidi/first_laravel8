@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Buku;
 use Illuminate\Http\Request;
 use Session;
 use Redirect;
@@ -21,11 +22,7 @@ class HomeController extends Controller
     }
 
     public function myHome(){
-        return view('myHome');
-    }
-
-    public function testLabel(){
-        $buku = DB::table('buku')->get();
-        dd($buku);
+        $buku = Buku::all();
+        return view('myHome', ['posts' => $buku, 'no' => 1]);
     }
 }

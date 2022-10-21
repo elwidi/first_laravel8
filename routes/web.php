@@ -30,5 +30,5 @@ Route::get('/demo', function () {
 });
 
 Route::get('my-home', [App\Http\Controllers\HomeController::class, 'myHome']);
-Route::get('test-tabel', [App\Http\Controllers\HomeController::class, 'testLabel']);
+// Route::get('test-tabel', [App\Http\Controllers\HomeController::class, 'testLabel']);
 
