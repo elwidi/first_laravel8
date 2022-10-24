@@ -31,5 +31,6 @@ Route::get('/demo', function () {
 
 Route::get('my-home', [App\Http\Controllers\HomeController::class, 'myHome']);
 Route::get('show-clinic', [App\Http\Controllers\ClinicController::class, 'showClinic'])->name('list-clinic');
+Route::get('add-clinic', [App\Http\Controllers\ClinicController::class, 'addClinic'])->name('add-clinic');
 // Route::get('test-tabel', [App\Http\Controllers\HomeController::class, 'testLabel']);
 

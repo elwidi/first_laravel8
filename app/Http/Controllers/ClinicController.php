@@ -29,4 +29,8 @@ class ClinicController extends Controller
         ];
         return view('clinic.showClinic', $data);
     }
+
+    public function addClinic(){
+        return view('clinic.addClinic');
+    }
 }
