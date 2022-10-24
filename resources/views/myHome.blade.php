@@ -23,26 +23,30 @@
         <div class="card-header">
       <h3 class="card-title">List Buku</h3>
       <div style="float:right;">
-        <button type="button" class="btn btn-success modif-data"><i class="fa fa-plus"></i>&nbsp; Add</button>
+        <a type="button" class="btn btn-success modif-data" href = "{{route('addBook')}}"><i class="fa fa-plus"></i>&nbsp; Add</a>
       </div>
         </div>
         <div class="card-body">
         <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th style="width: 10px">#</th>
+                    <th>Kode Buku</th>
                     <th>Judul Buku</th>
                     <th>Penulis</th>
                     <th>ISBN</th>
+                    <th>Tahun</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
                 @foreach($posts as $post)
                 <tr>
-                    <td>{{ $post->id }}</td>
+                    <td>{{ $post->kode_buku }}</td>
                     <td>{{ $post->judul }}</td>
                     <td>{{ $post->pengarang }}</td>
                     <td>{{ $post->isbn }}</td>
+                    <td>{{ $post->tahun }}</td>
+                    <td><a href = "{{route('update-book', $post->id)}}" class= "btn btn-sm btn-success"> Edit</a></td>
                 </tr>
                 @endforeach
             </tbody>

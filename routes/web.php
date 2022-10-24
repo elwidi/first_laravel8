@@ -29,8 +29,17 @@ Route::get('/demo', function () {
     return view('demo');
 });
 
-Route::get('my-home', [App\Http\Controllers\HomeController::class, 'myHome']);
-Route::get('show-clinic', [App\Http\Controllers\ClinicController::class, 'showClinic'])->name('list-clinic');
-Route::get('add-clinic', [App\Http\Controllers\ClinicController::class, 'addClinic'])->name('add-clinic');
+Route::get('my-home', [App\Http\Controllers\HomeController::class, 'myHome'])->name('home');
+Route::get('add-book', [App\Http\Controllers\HomeController::class, 'addBook'])->name('addBook');
+Route::post('save-book', [App\Http\Controllers\HomeController::class, 'saveBook'])->name('save-book');
+Route::get('/update-book/{id}', [App\Http\Controllers\HomeController::class, 'updateBook'])->name('update-book');
+Route::post('/modify-book/{id}', [App\Http\Controllers\HomeController::class, 'modifyBook'])->name('modify-book');
+
+
+Route::get('/new-owner', [App\Http\Controllers\OwnerController::class, 'addOwner'])->name('new-owner');
+Route::post('/store-owner', [App\Http\Controllers\OwnerController::class, 'storeOwner'])->name('store-owner');
+Route::post('/owner/json', [App\Http\Controllers\OwnerController::class, 'json']);
+Route::get('/owner-list', [App\Http\Controllers\OwnerController::class, 'ownerList'])->name('owner-list');
+Route::post('/owner/save-owner', [App\Http\Controllers\OwnerController::class, 'saveOwnerAjax'])->name('save-list');
 // Route::get('test-tabel', [App\Http\Controllers\HomeController::class, 'testLabel']);
 
