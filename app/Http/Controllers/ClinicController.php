@@ -22,12 +22,12 @@ class ClinicController extends Controller
     }
 
     public function showClinic(){
-        $clinic = Clinic::all();
-        $data = [
-            'clinics' => $clinic
+        // $clinic = Clinic::all();
+        // $data = [
+        //     'clinics' => $clinic
 
-        ];
-        return view('clinic.showClinic', $data);
+        // ];
+        return view('clinic.showClinic');
     }
 
     public function addClinic(){

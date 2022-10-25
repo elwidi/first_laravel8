@@ -48,8 +48,22 @@ class OwnerController extends Controller
     public function saveOwnerAjax(Request $request){
 
         $data = $request->all();
-        dd($data);
+
+        try{
+            $owner = Owner::create($data);
+            $response = [
+                'status' => 200,
+                'message' => 'data ok saved.'
+            ];
+        } catch(QueryException $e){
+            $response = [
+                'status' => 200,
+                'message' => $e->errorInfo
+            ];
+        }
         
+        echo json_encode($response);
+        exit;
 
     }
 }

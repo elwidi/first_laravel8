@@ -182,6 +182,7 @@ $(function() {
     });
 
     $('#add-owner').click(function(){
+      $('#form_user').trigger('reset')
       $('#modal-user-detail').modal('show');
     })
 
@@ -196,16 +197,16 @@ $(function() {
         data: form.serialize(),
         async: false,
         success: function (res) {
-          // submitting = false;
-          // if(res.status == 200){
-          //   var table1 = $("#table1").dataTable();
-          //   table1.api().ajax.reload();
-          //   toastr.success('Topology Approved');
-          //   $('#modal-upload-first').modal('toggle');
-          // } else {
-          //   return false;
-          //   // toastr.success(res.message);
-          // }
+          submitting = false;
+          if(res.status == 200){
+            var table1 = $("#table2").dataTable();
+            table1.api().ajax.reload();
+            toastr.success('Data Saved');
+            $('#modal-user-detail').modal('toggle');
+          } else {
+            return false;
+            toastr.danger(res.message);
+          }
         }
       });
     })
