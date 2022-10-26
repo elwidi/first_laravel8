@@ -95,6 +95,13 @@
               </div>
             </div>
 
+            <div class="form-group">
+              <label>Foto Kartu Reg</label>
+              <div class="form-group">
+                  <input type = "file" name = "file" id = "file" class = "form-control">
+              </div>
+            </div>
+
         </div>
         <div class="modal-footer justify-content-between">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -188,25 +195,28 @@ $(function() {
 
     $('#form_user').submit(function(e){
       e.preventDefault();
-      var form = $(this);
+      // var form = $(this);
 
       $.ajax({
         url: '/owner/save-owner/',
         type: 'POST',
         dataType: 'json',
-        data: form.serialize(),
+        data: new FormData(this),
+        processData:false,
+        contentType:false,
+        cache:false,
         async: false,
         success: function (res) {
-          submitting = false;
-          if(res.status == 200){
-            var table1 = $("#table2").dataTable();
-            table1.api().ajax.reload();
-            toastr.success('Data Saved');
-            $('#modal-user-detail').modal('toggle');
-          } else {
-            return false;
-            toastr.danger(res.message);
-          }
+          // submitting = false;
+          // if(res.status == 200){
+          //   var table1 = $("#table2").dataTable();
+          //   table1.api().ajax.reload();
+          //   toastr.success('Data Saved');
+          //   $('#modal-user-detail').modal('toggle');
+          // } else {
+          //   return false;
+          //   toastr.danger(res.message);
+          // }
         }
       });
     })

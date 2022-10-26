@@ -49,6 +49,12 @@ class OwnerController extends Controller
 
         $data = $request->all();
 
+        $fileName = time().'_'.$request->file->getClientOriginalName();
+        $filePath = $request->file('file')->storeAs('uploads', $fileName, 'public');
+
+        $data['file_name'] = $fileName;
+        $data['file_path'] = '/storage/'.$filePath;
+
         try{
             $owner = Owner::create($data);
             $response = [

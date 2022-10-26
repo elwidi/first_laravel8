@@ -10,5 +10,5 @@ class Owner extends Model
     use HasFactory;
 
     protected $table = 'owner';
-    protected $fillable = ['kode_pelanggan', 'name', 'alamat', 'no_hp', 'email'];
+    protected $fillable = ['kode_pelanggan', 'name', 'alamat', 'no_hp', 'email', 'file_name', 'file_path'];
 }
