@@ -174,7 +174,7 @@ $(function() {
             },
             {
                 render: function (data, type, row) {
-                  var d = "";
+                  var d = '<button type="button" class="btn btn-default edit-data" data-id = "'+row.id+'">Edit</button>';
                   return d;
                 },
                 orderable: true,
@@ -184,9 +184,31 @@ $(function() {
         ],
         "order": [[0, 'desc']],
         fnDrawCallback : function (oSettings) {
-            // table_callback();
+            table_callback();
         }
     });
+
+    function table_callback(){
+      $('.edit-data').click(function(){
+        var id = $(this).attr('data-id');
+        $.ajax({
+          url: '/owner/detail/'+id,
+          type: 'GET',
+          dataType: 'json',
+          // data: new FormData(this),
+          async: false,
+          success: function (res) {
+            // submitting = false;
+            if(res.status == 200){
+              $('#modal-user-detail').modal('toggle');
+            } else {
+              return false;
+              toastr.danger(res.message);
+            }
+          }
+        });
+      })
+    }
 
     $('#add-owner').click(function(){
       $('#form_user').trigger('reset')
@@ -208,15 +230,15 @@ $(function() {
         async: false,
         success: function (res) {
           // submitting = false;
-          // if(res.status == 200){
-          //   var table1 = $("#table2").dataTable();
-          //   table1.api().ajax.reload();
-          //   toastr.success('Data Saved');
-          //   $('#modal-user-detail').modal('toggle');
-          // } else {
-          //   return false;
-          //   toastr.danger(res.message);
-          // }
+          if(res.status == 200){
+            var table1 = $("#table2").dataTable();
+            table1.api().ajax.reload();
+            toastr.success('Data Saved');
+            $('#modal-user-detail').modal('toggle');
+          } else {
+            return false;
+            toastr.danger(res.message);
+          }
         }
       });
     })

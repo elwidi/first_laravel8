@@ -72,4 +72,25 @@ class OwnerController extends Controller
         exit;
 
     }
+
+    public function ownerDetailAjax($id){
+        $owner = Owner::find($id);
+
+        if(!empty($owner)){
+            $response = [
+                'status' => 200,
+                'message' => 'load data ok.',
+                'data' => $owner
+            ];
+        } else {
+            $response = [
+                'status' => 400,
+                'message' => 'data empty.'
+            ];
+        }
+
+        echo json_encode($response); exit;
+
+        
+    }
 }
