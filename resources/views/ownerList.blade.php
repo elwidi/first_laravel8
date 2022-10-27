@@ -77,7 +77,7 @@
             <div class="form-group">
               <label>Alamat</label>
               <div class="form-group">
-                  <input type = "text" name = "alamat" id = "name" class = "form-control">
+                  <input type = "text" name = "alamat" id = "alamat" class = "form-control">
               </div>
             </div>
 
@@ -88,7 +88,7 @@
               </div>
             </div>
 
-            <div class="form-group">
+                <div class="form-group">
               <label>Email</label>
               <div class="form-group">
                   <input type = "text" name = "email" id = "email" class = "form-control">
@@ -174,7 +174,8 @@ $(function() {
             },
             {
                 render: function (data, type, row) {
-                  var d = '<button type="button" class="btn btn-default edit-data" data-id = "'+row.id+'">Edit</button>';
+                  var d = '<button type="button" class="btn btn-default edit-data" data-id = "'+row.id+'"><i class = "fa fa-edit"></i></button>';
+                  d += '&nbsp; <button type="button" class="btn btn-danger delete-data" data-id = "'+row.id+'"><i class = "fa fa-trash"></i></button>';
                   return d;
                 },
                 orderable: true,
@@ -201,12 +202,33 @@ $(function() {
             // submitting = false;
             if(res.status == 200){
               $('#modal-user-detail').modal('toggle');
+              $.each(res.data, function(i,e){
+                var elem = '#'+i;
+                $(elem).val(e);
+              })
             } else {
               return false;
               toastr.danger(res.message);
             }
           }
         });
+      })
+
+      $('.delete-data').click(function(){
+        toastr.warning("<br /><button type='button' value='yes' class = 'btn btn-success'>Yes</button> &nbsp;<button type='button' class = 'btn btn-danger' value='no' >No</button>",'Are you sure you want to delete this item?',
+        {
+            allowHtml: true,
+            onclick: function (toast) {
+              value = toast.target.value
+              if (value == 'yes') {
+                
+              } else {
+                toastr.clear();
+                toastr.info('Data will not be deleled.')
+              }
+            }
+
+        })
       })
     }
 
