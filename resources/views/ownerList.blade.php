@@ -215,13 +215,31 @@ $(function() {
       })
 
       $('.delete-data').click(function(){
+        var id = $(this).attr('data-id');
+
         toastr.warning("<br /><button type='button' value='yes' class = 'btn btn-success'>Yes</button> &nbsp;<button type='button' class = 'btn btn-danger' value='no' >No</button>",'Are you sure you want to delete this item?',
         {
             allowHtml: true,
             onclick: function (toast) {
               value = toast.target.value
               if (value == 'yes') {
-                
+                $.ajax({
+                  url: '/owner/delete/'+id,
+                  type: 'GET',
+                  dataType: 'json',
+                  // data: new FormData(this),
+                  async: false,
+                  success: function (res) {
+                    // submitting = false;
+                    if(res.status == 200){
+                      toastr.success('Data has been deleted.')
+                      var table1 = $("#table2").dataTable();
+                      table1.api().ajax.reload();
+                    } else {
+                      toastr.danger(res.message);
+                    }
+                  }
+                });
               } else {
                 toastr.clear();
                 toastr.info('Data will not be deleled.')

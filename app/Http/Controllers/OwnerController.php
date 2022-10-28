@@ -93,4 +93,15 @@ class OwnerController extends Controller
 
         
     }
+
+    public function ownerDelete($id)
+    {
+        $deletedRows = Owner::where('id', $id)->delete();
+        $response = [
+            'status' => 200,
+            'message' => 'success delete'
+        ];
+
+        echo json_encode($response); exit;
+    }
 }

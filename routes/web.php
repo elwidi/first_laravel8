@@ -42,5 +42,6 @@ Route::post('/owner/json', [App\Http\Controllers\OwnerController::class, 'json']
 Route::get('/owner-list', [App\Http\Controllers\OwnerController::class, 'ownerList'])->name('owner-list');
 Route::post('/owner/save-owner', [App\Http\Controllers\OwnerController::class, 'saveOwnerAjax'])->name('save-list');
 Route::get('/owner/detail/{id}', [App\Http\Controllers\OwnerController::class, 'ownerDetailAjax']);
+Route::get('/owner/delete/{id}', [App\Http\Controllers\OwnerController::class, 'ownerDelete']);
 // Route::get('test-tabel', [App\Http\Controllers\HomeController::class, 'testLabel']);
 
