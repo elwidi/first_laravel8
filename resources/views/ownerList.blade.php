@@ -61,15 +61,26 @@
             <div class="form-group">
               <label>No Registrasi</label>
               <div class="form-group">
-                  <!-- <input type = "hidden" name = "user_id" id = "user_id"> -->
+                  <input type = "hidden" name = "owner_id" id = "owner_id">
                   <input type = "text" name = "kode_pelanggan" id = "kode_pelanggan" class = "form-control">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Klinik</label>
+              <div class="form-group">
+                  <select name = "klinik_id" id = "klinik_id" class = "select2">
+                    <option></option>
+                    @foreach($clinic as $c)
+                    <option value = "{{$c->id}}">{{$c->nama_klinik}}</option>
+                    @endforeach
+                  </select>
               </div>
             </div>
 
             <div class="form-group">
               <label>Nama</label>
               <div class="form-group">
-                  <!-- <input type = "hidden" name = "user_id" id = "user_id"> -->
                   <input type = "text" name = "name" id = "name" class = "form-control">
               </div>
             </div>
@@ -88,7 +99,7 @@
               </div>
             </div>
 
-                <div class="form-group">
+            <div class="form-group">
               <label>Email</label>
               <div class="form-group">
                   <input type = "text" name = "email" id = "email" class = "form-control">
@@ -202,6 +213,8 @@ $(function() {
             // submitting = false;
             if(res.status == 200){
               $('#modal-user-detail').modal('toggle');
+              $('#modal-user-detail #owner_id').val(res.data.id);
+              $("#modal-user-detail #klinik_id").val(res.data.klinik_id).trigger('change');
               $.each(res.data, function(i,e){
                 var elem = '#'+i;
                 $(elem).val(e);
@@ -251,7 +264,8 @@ $(function() {
     }
 
     $('#add-owner').click(function(){
-      $('#form_user').trigger('reset')
+      $('#form_user').trigger('reset');
+      $("#modal-user-detail #klinik_id").val('').trigger('change');
       $('#modal-user-detail').modal('show');
     })
 

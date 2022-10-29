@@ -1,5 +1,5 @@
 <a href="" class="brand-link">
-      <span class="brand-text font-weight-light">Apps</span>
+      <span class="brand-text font-weight-light"> Registrasi Klinik Hewan</span>
     </a>
     
 
@@ -18,13 +18,13 @@
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-item">
-            <a href="{{route('home')}}" class="nav-link">
-            <i class="nav-icon fas fa-home"></i> Home</a>
+            <a href="{{route('owner-list')}}" class="nav-link">
+            <i class="nav-icon fas fa-home"></i> Owner</a>
           </li>
 
           <li class="nav-item">
-            <a href="" class="nav-link">
-            <i class="nav-icon fas fa-th-list"></i> Menu 2</a>
+            <a href="{{route('clinic-list')}}" class="nav-link">
+            <i class="nav-icon fas fa-th-list"></i> Clinic</a>
           </li>
 
           <li class="nav-item">

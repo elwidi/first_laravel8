@@ -6,6 +6,7 @@ use Session;
 use Redirect;
 use DataTables;
 use App\Models\Owner;
+use App\Models\Clinic;
 use Illuminate\Http\Request;
 Use Illuminate\Database\QueryException;
 
@@ -35,13 +36,13 @@ class OwnerController extends Controller
 
     }
 
-
     public function json(){
         return Datatables::of(Owner::all())->make(true);
     }
 
     public function ownerList(){
-        return view('ownerList');
+        $data['clinic'] = Clinic::all();
+        return view('ownerList', $data);
     }
 
 
@@ -49,25 +50,35 @@ class OwnerController extends Controller
 
         $data = $request->all();
 
-        $fileName = time().'_'.$request->file->getClientOriginalName();
-        $filePath = $request->file('file')->storeAs('uploads', $fileName, 'public');
+        if ($_FILES['file']['size'] > 0){
+            $fileName = time().'_'.$request->file->getClientOriginalName();
+            $filePath = $request->file('file')->storeAs('uploads', $fileName, 'public');
 
-        $data['file_name'] = $fileName;
-        $data['file_path'] = '/storage/'.$filePath;
-
-        try{
-            $owner = Owner::create($data);
+            $data['file_name'] = $fileName;
+            $data['file_path'] = '/storage/'.$filePath;
+        }
+        
+        if(!empty($data['owner_id'])){
+            $owner = Owner::find($data['owner_id']);
+            $owner->update($request->all());
             $response = [
                 'status' => 200,
                 'message' => 'data ok saved.'
             ];
-        } catch(QueryException $e){
-            $response = [
-                'status' => 200,
-                'message' => $e->errorInfo
-            ];
+        } else {
+           try{
+                $owner = Owner::create($data);
+                $response = [
+                    'status' => 200,
+                    'message' => 'data ok saved.'
+                ];
+            } catch(QueryException $e){
+                $response = [
+                    'status' => 200,
+                    'message' => $e->errorInfo
+                ];
+            }
         }
-        
         echo json_encode($response);
         exit;
 
@@ -75,7 +86,7 @@ class OwnerController extends Controller
 
     public function ownerDetailAjax($id){
         $owner = Owner::find($id);
-
+        // $owner->klinik = Owner::find($id)->clinic;
         if(!empty($owner)){
             $response = [
                 'status' => 200,

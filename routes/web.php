@@ -35,13 +35,21 @@ Route::post('save-book', [App\Http\Controllers\HomeController::class, 'saveBook'
 Route::get('/update-book/{id}', [App\Http\Controllers\HomeController::class, 'updateBook'])->name('update-book');
 Route::post('/modify-book/{id}', [App\Http\Controllers\HomeController::class, 'modifyBook'])->name('modify-book');
 
-
+#Owner Module Routes
 Route::get('/new-owner', [App\Http\Controllers\OwnerController::class, 'addOwner'])->name('new-owner');
 Route::post('/store-owner', [App\Http\Controllers\OwnerController::class, 'storeOwner'])->name('store-owner');
 Route::post('/owner/json', [App\Http\Controllers\OwnerController::class, 'json']);
-Route::get('/owner-list', [App\Http\Controllers\OwnerController::class, 'ownerList'])->name('owner-list');
+Route::get('/owner', [App\Http\Controllers\OwnerController::class, 'ownerList'])->name('owner-list');
 Route::post('/owner/save-owner', [App\Http\Controllers\OwnerController::class, 'saveOwnerAjax'])->name('save-list');
 Route::get('/owner/detail/{id}', [App\Http\Controllers\OwnerController::class, 'ownerDetailAjax']);
 Route::get('/owner/delete/{id}', [App\Http\Controllers\OwnerController::class, 'ownerDelete']);
+
+#Clinic Module Routes
+Route::get('/clinic', [App\Http\Controllers\ClinicController::class, 'showClinic'])->name('clinic-list');
+Route::post('/clinic/datatable', [App\Http\Controllers\ClinicController::class, 'json']);
+Route::post('/clinic/store', [App\Http\Controllers\ClinicController::class, 'storeClinicAjax']);
+Route::get('/clinic/delete/{id}', [App\Http\Controllers\ClinicController::class, 'clicDeleteAjax']);
+
+
 // Route::get('test-tabel', [App\Http\Controllers\HomeController::class, 'testLabel']);
 

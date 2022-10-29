@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Apps</title>
+  <title>Registrasi Klinik Hewan</title>
   <link rel="icon" type="image/png">
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -127,6 +127,16 @@
 
 <!-- AdminLTE for demo purposes -->
 <script src="{{ url('/adminlte/dist/js/demo.js') }}"></script>
+<script>
+  $(function(){
+    $('.select2').select2({
+      theme: 'bootstrap4',
+      width: '100%'
+    });
+  })
+
+</script>
+
 @stack('scripts')
 </body>
 </html>
