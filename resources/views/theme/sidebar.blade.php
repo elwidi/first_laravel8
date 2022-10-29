@@ -19,12 +19,12 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-item">
             <a href="{{route('owner-list')}}" class="nav-link">
-            <i class="nav-icon fas fa-home"></i> Owner</a>
+            <i class="nav-icon fas fa-hospital-user"></i> Owner</a>
           </li>
 
           <li class="nav-item">
             <a href="{{route('clinic-list')}}" class="nav-link">
-            <i class="nav-icon fas fa-th-list"></i> Clinic</a>
+            <i class="nav-icon fas fa-hospital-alt"></i> Clinic</a>
           </li>
 
           <li class="nav-item">
