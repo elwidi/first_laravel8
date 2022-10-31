@@ -24,7 +24,7 @@ class CustomAuthController extends Controller
         if(Auth::attempt($credentials)){
             Session::put('email', $request->Input('email'));
             Session::put('is_login', 1);
-            return redirect()->intended('my-home')->withSuccess('Signed in');
+            return redirect()->intended('clinic')->withSuccess('Signed in');
         }
 
         return redirect('login')->withSuccess('Login details are not valid');

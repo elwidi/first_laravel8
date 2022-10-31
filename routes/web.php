@@ -50,6 +50,11 @@ Route::post('/clinic/datatable', [App\Http\Controllers\ClinicController::class, 
 Route::post('/clinic/store', [App\Http\Controllers\ClinicController::class, 'storeClinicAjax']);
 Route::get('/clinic/delete/{id}', [App\Http\Controllers\ClinicController::class, 'clicDeleteAjax']);
 
+#Pet Module Routes
+Route::get('/pet', [App\Http\Controllers\PetController::class, 'showPet'])->name('pet');
+Route::post('/pet/datatable', [App\Http\Controllers\PetController::class, 'dtJson']);;
+
+
 
 // Route::get('test-tabel', [App\Http\Controllers\HomeController::class, 'testLabel']);
 
