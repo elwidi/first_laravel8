@@ -6,6 +6,7 @@ use Session;
 use Redirect;
 use DataTables;
 use App\Models\Owner;
+use App\Models\Pet;
 use App\Models\Clinic;
 use Illuminate\Http\Request;
 Use Illuminate\Database\QueryException;
@@ -101,8 +102,6 @@ class OwnerController extends Controller
         }
 
         echo json_encode($response); exit;
-
-        
     }
 
     public function ownerDelete($id)
@@ -114,5 +113,17 @@ class OwnerController extends Controller
         ];
 
         echo json_encode($response); exit;
+    }
+
+    public function ownerDetail($id){
+        $data['owner'] = Owner::find($id);
+        $pet = Pet::where('owner_id', $id)->get();
+        foreach($pet as $i => $p){
+            if($p->desexing == 1) $p->desexing = 'Spayed';
+            else $p->desexing = '-';
+        }
+
+        $data['pet'] = $pet;
+        return view('owner.ownerDetail', $data);
     }
 }

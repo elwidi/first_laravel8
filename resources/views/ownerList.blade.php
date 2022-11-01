@@ -185,8 +185,11 @@ $(function() {
             },
             {
                 render: function (data, type, row) {
-                  var d = '<button type="button" class="btn btn-default edit-data" data-id = "'+row.id+'"><i class = "fa fa-edit"></i></button>';
-                  d += '&nbsp; <button type="button" class="btn btn-danger delete-data" data-id = "'+row.id+'"><i class = "fa fa-trash"></i></button>';
+                  var url = '{{ route("owner-view", ":id") }}';
+                  url = url.replace(':id', row.id);
+                  var d = '<button type="button" class="btn btn-sm btn-default edit-data" data-id = "'+row.id+'"><i class = "fa fa-edit"></i></button>';
+                  d += '&nbsp; <a href = "'+url+'" class="btn btn-sm btn-info"><i class = "fa fa-eye"></i></a>';
+                  d += '&nbsp; <button type="button" class="btn btn-sm btn-danger delete-data" data-id = "'+row.id+'"><i class = "fa fa-trash"></i></button>';
                   return d;
                 },
                 orderable: true,

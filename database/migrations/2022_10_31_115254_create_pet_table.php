@@ -19,6 +19,7 @@ class CreatePetTable extends Migration
             $table->string('name');
             $table->date('dob');
             $table->string('species');
+            $table->string('sex');
             $table->string('race');
             $table->string('color');
             $table->string('pattern');

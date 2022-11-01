@@ -43,6 +43,7 @@ Route::get('/owner', [App\Http\Controllers\OwnerController::class, 'ownerList'])
 Route::post('/owner/save-owner', [App\Http\Controllers\OwnerController::class, 'saveOwnerAjax'])->name('save-list');
 Route::get('/owner/detail/{id}', [App\Http\Controllers\OwnerController::class, 'ownerDetailAjax']);
 Route::get('/owner/delete/{id}', [App\Http\Controllers\OwnerController::class, 'ownerDelete']);
+Route::get('/owner/view/{id}', [App\Http\Controllers\OwnerController::class, 'ownerDetail'])->name('owner-view');
 
 #Clinic Module Routes
 Route::get('/clinic', [App\Http\Controllers\ClinicController::class, 'showClinic'])->name('clinic-list');
