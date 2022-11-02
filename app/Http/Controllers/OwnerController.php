@@ -119,7 +119,7 @@ class OwnerController extends Controller
         $data['owner'] = Owner::find($id);
         $pet = Pet::where('owner_id', $id)->get();
         foreach($pet as $i => $p){
-            if($p->desexing == 1) $p->desexing = 'Spayed';
+            if($p->desexing == 1) $p->desexing = 'Sudah Steril';
             else $p->desexing = '-';
         }
 

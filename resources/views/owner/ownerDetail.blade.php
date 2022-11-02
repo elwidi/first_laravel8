@@ -59,48 +59,55 @@
                 <input type="text" value = "{{$owner->email}}" class="form-control" disabled>
               </div>
             </div>
-            <hr/>
+          </div>
+          <!-- /.card-body -->
+        </div>
+      </div>
+      @foreach($pet as $p)
+      <div class="col-md-12">
+        <div class="card card-purple">
+          <div class = "card-header">
+            <h3 class = "card-title">{{$p->name}}</h3>
+          </div>
+          <div class="card-body">
             <div class = "row">
-              <div class = "col-md-12">
-                <label for="inputName">Pet</label>
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>Nama</th>
-                            <th>Species</th>
-                            <th>DOB</th>
-                            <th>Sex</th>
-                            <th>Race</th>
-                            <th>Color</th>
-                            <th>Pattern</th>
-                            <th>Age</th>
-                            <th>Blood Type</th>
-                            <th>Spayed</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($pet as $p)
-                        <tr>
-                            <td>{{$p->name}}</td>
-                            <td>{{$p->species}}</td>
-                            <td>{{$p->dob}}</td>
-                            <td>{{$p->sex}}</td>
-                            <td>{{$p->race}}</td>
-                            <td>{{$p->color}}</td>
-                            <td>{{$p->pattern}}</td>
-                            <td>{{$p->age}}</td>
-                            <td>{{$p->blood_type}}</td>
-                            <td>{{$p->desexing}}</td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+              <div class = "col-md-3">
+                  <label>Spesies : </label>{{$p->species}}
+              </div>
+              <div class = "col-md-3">
+                  <label>DOB : </label> {{$p->dob}}
+              </div>
+              <div class = "col-md-6">
+                  <label>Jenis Kelamin : </label> {{$p->sex}}
+              </div>
+            </div>
+            <div class = "row">
+              <div class = "col-md-3">
+                  <label>Ras : </label> {{$p->race}}
+              </div>
+              <div class = "col-md-3">
+                  <label>Warna : </label> {{$p->color}}
+              </div>
+              <div class = "col-md-6">
+                  <label>Pola : </label> {{$p->pattern}}
+              </div>
+            </div>
+            <div class = "row">
+              <div class = "col-md-3">
+                  <label>Golongan Darah : </label> {{$p->blood_type}}
+              </div>
+              <div class = "col-md-3">
+                  <label>Umur : </label> {{$p->age}}
+              </div>
+              <div class = "col-md-6">
+                  <label>Status Steril : </label> {{$p->desexing}}
               </div>
             </div>
           </div>
           <!-- /.card-body -->
         </div>
       </div>
+      @endforeach
       <!-- Administration - End !-->
     </div>
   </div>
