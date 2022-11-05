@@ -63,53 +63,65 @@
           <!-- /.card-body -->
         </div>
       </div>
-      @foreach($pet as $p)
       <div class="col-md-12">
         <div class="card card-purple">
           <div class = "card-header">
-            <h3 class = "card-title">{{$p->name}}</h3>
+            <h3 class = "card-title">Pet</h3>
           </div>
           <div class="card-body">
-            <div class = "row">
-              <div class = "col-md-3">
-                  <label>Spesies : </label>{{$p->species}}
-              </div>
-              <div class = "col-md-3">
-                  <label>DOB : </label> {{$p->dob}}
-              </div>
-              <div class = "col-md-6">
-                  <label>Jenis Kelamin : </label> {{$p->sex}}
-              </div>
-            </div>
-            <div class = "row">
-              <div class = "col-md-3">
-                  <label>Ras : </label> {{$p->race}}
-              </div>
-              <div class = "col-md-3">
-                  <label>Warna : </label> {{$p->color}}
-              </div>
-              <div class = "col-md-6">
-                  <label>Pola : </label> {{$p->pattern}}
-              </div>
-            </div>
-            <div class = "row">
-              <div class = "col-md-3">
-                  <label>Golongan Darah : </label> {{$p->blood_type}}
-              </div>
-              <div class = "col-md-3">
-                  <label>Umur : </label> {{$p->age}}
-              </div>
-              <div class = "col-md-6">
-                  <label>Status Steril : </label> {{$p->desexing}}
-              </div>
-            </div>
+            <table class = "table table-condensed">
+              <thead>
+                <tr>
+                  <th>Nama</th>
+                  <th>Spesies</th>
+                  <th>Jenis Kelamin</th>
+                  <th>Umur</th>
+                  <th>Ras</th>
+                  <th>Warna</th>
+                </tr>
+              </thead>
+              <tbody>
+                @forelse($pet as $p)
+                <tr>
+                  <td><a class = "pet_detail" data-pet-id = "{{$p->id}}" href = "#">{{ $p->name }}</a></td>
+                  <td>{{ $p->species }}</td>
+                  <td>{{ $p->sex }}</td>
+                  <td>{{ $p->age }}</td>
+                  <td>{{ $p->race }}</td>
+                  <td>{{ $p->color }}</td>
+                  <td></td>
+                </tr>
+                @empty
+                <tr>
+                  <td colspan = "6" class = "txt-center">No pet data.</td>
+                </tr>
+                @endforelse
+              </tbody>
+            </table>
           </div>
-          <!-- /.card-body -->
         </div>
       </div>
-      @endforeach
       <!-- Administration - End !-->
     </div>
   </div>
 </section>
 @endsection
+
+@push('scripts')
+<script>
+  $(function() {
+    $('.pet_detail').click(function(e){
+      var petId = $(this).attr('data-pet-id');
+      $.ajax({
+        url: '/pet/detail_ajax/'+petId,
+        type: 'GET',
+        dataType: 'json',
+        async: false,
+        success: function (res) {
+          return false;
+        }
+      })
+    })
+  })
+</script>
+@endpush

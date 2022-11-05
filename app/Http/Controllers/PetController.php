@@ -28,4 +28,14 @@ class PetController extends Controller
         );
         return Datatables::of($pet)->make(true);
     }
+
+    public function detailbyAjax($id){
+        $pet = Pet::find($id);
+        if(!empty($pet)){
+            $res = ['status' => 200, 'data' => $pet];
+        } else {
+            $res = ['status' => 400];
+        }
+        echo json_encode($res); exit;
+    }
 }

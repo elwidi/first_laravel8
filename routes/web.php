@@ -53,6 +53,7 @@ Route::get('/clinic/delete/{id}', [App\Http\Controllers\ClinicController::class,
 
 #Pet Module Routes
 Route::get('/pet', [App\Http\Controllers\PetController::class, 'showPet'])->name('pet');
+Route::get('/pet/detail_ajax/{id}', [App\Http\Controllers\PetController::class, 'detailbyAjax']);
 Route::post('/pet/datatable', [App\Http\Controllers\PetController::class, 'dtJson']);;
 
 
