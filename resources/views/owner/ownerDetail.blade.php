@@ -105,12 +105,68 @@
     </div>
   </div>
 </section>
+
+<div class="modal fade" id="modal-pet-detail">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Pet's Name</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="card card-primary card-outline card-outline-tabs">
+          <div class="card-header p-0 pt-1">
+            <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
+              <li class="nav-item">
+                <a class="nav-link active" id="custom-tabs-one-home-tab" data-toggle="pill" href="#custom-tabs-one-home" role="tab" aria-controls="custom-tabs-one-home" aria-selected="true">Information</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="custom-tabs-one-profile-tab" data-toggle="pill" href="#custom-tabs-one-profile" role="tab" aria-controls="custom-tabs-one-profile" aria-selected="false">Visits</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="custom-tabs-one-messages-tab" data-toggle="pill" href="#custom-tabs-one-messages" role="tab" aria-controls="custom-tabs-one-messages" aria-selected="false">Vaccination</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="custom-tabs-one-settings-tab" data-toggle="pill" href="#custom-tabs-one-settings" role="tab" aria-controls="custom-tabs-one-settings" aria-selected="false">Parasite Prevention</a>
+              </li>
+            </ul>
+          </div>
+          <div class="card-body">
+            <div class="tab-content" id="custom-tabs-one-tabContent">
+              <div class="tab-pane fade show active" id="custom-tabs-one-home" role="tabpanel" aria-labelledby="custom-tabs-one-home-tab">
+                  <span> Name : </span><span id = "show_detail_name"></span>
+              </div>
+              <div class="tab-pane fade" id="custom-tabs-one-profile" role="tabpanel" aria-labelledby="custom-tabs-one-profile-tab">
+                  Isi Tab Visits
+              </div>
+              <div class="tab-pane fade" id="custom-tabs-one-messages" role="tabpanel" aria-labelledby="custom-tabs-one-messages-tab">
+                 Isi Tab Vaksinasi
+              </div>
+              <div class="tab-pane fade" id="custom-tabs-one-settings" role="tabpanel" aria-labelledby="custom-tabs-one-settings-tab">
+                  Isi Tab Parasite Prevention
+              </div>
+            </div>
+          </div>
+          <!-- /.card -->
+        </div>
+      </div>
+      <div class="modal-footer pull-right">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
 @endsection
 
 @push('scripts')
 <script>
   $(function() {
     $('.pet_detail').click(function(e){
+      $('#modal-pet-detail').modal('show');
       var petId = $(this).attr('data-pet-id');
       $.ajax({
         url: '/pet/detail_ajax/'+petId,
@@ -118,7 +174,9 @@
         dataType: 'json',
         async: false,
         success: function (res) {
-          return false;
+          if(res.status == 200){
+            $('#show_detail_name').html(res.data.name);
+          }
         }
       })
     })

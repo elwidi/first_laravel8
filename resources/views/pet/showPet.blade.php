@@ -27,7 +27,7 @@
       </div>
         </div>
         <div class="card-body">
-        <table class="table table-bordered" id = "table_pet">
+        <table class="table table-condensed" id = "table_pet">
             @csrf
             <thead>
                 <tr>
