@@ -21,4 +21,8 @@ class Pet extends Model
         'blood_type',
         'desexing'
     ];
+
+    public function owner(){
+        return $this->belongsTo(Owner::class, 'owner_id');
+    }
 }

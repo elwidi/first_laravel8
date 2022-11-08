@@ -69,7 +69,11 @@
             <h3 class = "card-title">Pet</h3>
           </div>
           <div class="card-body">
-            <table class = "table table-condensed">
+            <div class = "row">
+              <button class = "btn btn-info btn-sm" style = "float:right;"> Add</button>
+            </div>
+            <br/>
+            <table class = "table table-bordered">
               <thead>
                 <tr>
                   <th>Nama</th>
@@ -78,6 +82,7 @@
                   <th>Umur</th>
                   <th>Ras</th>
                   <th>Warna</th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody>
@@ -89,7 +94,7 @@
                   <td>{{ $p->age }}</td>
                   <td>{{ $p->race }}</td>
                   <td>{{ $p->color }}</td>
-                  <td></td>
+                  <td><button class = "btn btn-default new-visit" data-pet-id = "{{$p->id}}">Visit</button></td>
                 </tr>
                 @empty
                 <tr>
@@ -160,6 +165,52 @@
   </div>
   <!-- /.modal-dialog -->
 </div>
+
+<div class="modal fade" id="modal-new-visit">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Visits</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form role="form" id = "form_user" method="POST">
+        @csrf
+        <div class="modal-body">
+            <div class="form-group">
+              <label>Owner</label>
+              <div class="form-group">
+                  <input type = "hidden" name = "owner_id" id = "owner_id">
+                  <input type = "text" name = "owner_name" id = "owner_name" class = "form-control" disabled>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Pet</label>
+              <div class="form-group">
+                  <input type = "hidden" name = "pet_id" id = "pet_id">
+                  <input type = "text" name = "pet_name" id = "pet_name" class = "form-control" disabled>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Prognosis</label>
+              <div class="form-group">
+                  <textarea class = "form-control" name = "prognosis" id = "prognosis" row = "5"></textarea>
+              </div>
+            </div>
+        </div>
+        <div class="modal-footer justify-content-between">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-success">Save</button>
+        </div>
+      </form>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
 @endsection
 
 @push('scripts')
@@ -176,6 +227,23 @@
         success: function (res) {
           if(res.status == 200){
             $('#show_detail_name').html(res.data.name);
+          }
+        }
+      })
+    })
+
+    $('.new-visit').click(function(e){
+      $('#modal-new-visit').modal('show');
+      var petId = $(this).attr('data-pet-id');
+      $.ajax({
+        url: '/pet/detail_ajax/'+petId,
+        type: 'GET',
+        dataType: 'json',
+        async: false,
+        success: function (res) {
+          if(res.status == 200){
+            $('#modal-new-visit #pet_name').val(res.data.name);
+            $('#modal-new-visit #owner_name').val(res.data.owner_name);
           }
         }
       })

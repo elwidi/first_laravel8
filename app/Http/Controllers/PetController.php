@@ -31,6 +31,7 @@ class PetController extends Controller
 
     public function detailbyAjax($id){
         $pet = Pet::find($id);
+        $pet->owner_name = $pet->owner->name;
         if(!empty($pet)){
             $res = ['status' => 200, 'data' => $pet];
         } else {

@@ -10,5 +10,5 @@ class PetVisit extends Model
     use HasFactory;
 
     protected $table = 'pet_visit';
-    protected $fillable = ['pet_id', 'vet_id', 'prognosis', 'weight', 'temperature', 'diagnose', 'note', 'admin_id', 'visit_date'];
+    protected $fillable = ['pet_id', 'vet_id', 'prognosis', 'weight', 'temperature', 'diagnose', 'note', 'admin_id', 'visit_date', 'status'];
 }

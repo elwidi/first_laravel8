@@ -274,7 +274,6 @@ $(function() {
 
     $('#form_user').submit(function(e){
       e.preventDefault();
-      // var form = $(this);
 
       $.ajax({
         url: '/owner/save-owner/',
