@@ -175,7 +175,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form role="form" id = "form_user" method="POST">
+      <form role="form" id = "form_new_visit" method="POST">
         @csrf
         <div class="modal-body">
             <div class="form-group">
@@ -242,8 +242,27 @@
         async: false,
         success: function (res) {
           if(res.status == 200){
+            $('#modal-new-visit #pet_id').val(res.data.id);
             $('#modal-new-visit #pet_name').val(res.data.name);
+            $('#modal-new-visit #owner_id').val(res.data.owner_id);
             $('#modal-new-visit #owner_name').val(res.data.owner_name);
+          }
+        }
+      })
+    })
+
+    $('#form_new_visit').submit(function(e){
+      e.preventDefault();
+      var form = $(this);
+      $.ajax({
+        url: '/visit/new/',
+        type: 'POST',
+        dataType: 'json',
+        data:form.serialize(),
+        async: false,
+        success: function (res) {
+          if(res.status == 200){
+            location.reload();
           }
         }
       })

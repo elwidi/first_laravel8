@@ -11,4 +11,16 @@ class PetVisit extends Model
 
     protected $table = 'pet_visit';
     protected $fillable = ['pet_id', 'vet_id', 'prognosis', 'weight', 'temperature', 'diagnose', 'note', 'admin_id', 'visit_date', 'status'];
+
+    public function owner(){
+        return $this->belongsTo(Owner::class, 'owner_id');
+    }
+
+    public function pet(){
+        return $this->belongsTo(Pet::class, 'pet_id');
+    }
+
+    public function vet(){
+        return $this->belongsTo(Vet::class, 'vet_id');
+    }
 }
