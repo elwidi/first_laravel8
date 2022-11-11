@@ -20,18 +20,11 @@ class PetVisitController extends Controller
     }
 
     public function dtJson(){
-        // return Datatables::of(Owner::all())->make(true);
-
-        // $pet = PetVisit::join('owner', 'pet.owner_id', '=', 'owner.id')->select(
-        //     'owner.name as owner_name', 'pet.name', 'dob', 'species', 'race'
-        // );
-        // return Datatables::of($pet)->make(true);
-
+        return Datatables::of( PetVisit::with(['pet.owner'])->get())->make(true);
     }
 
     public function visitList(){
-        $data['clinic'] = Clinic::all();
-        return view('ownerList', $data);
+        return view('visit.visitList');
     }
 
     public function saveNewVisit(Request $request){
@@ -57,7 +50,7 @@ class PetVisitController extends Controller
 
     #understanding eloquent relation
     public function cekiData(){
-        $data = PetVisit::with(['pet'])->get();
+        $data = PetVisit::with(['pet.owner'])->get();
         foreach($data as $i => $y){
             dd($y->pet);
         }

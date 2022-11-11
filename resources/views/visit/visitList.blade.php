@@ -31,11 +31,13 @@
             @csrf
             <thead>
                 <tr>
-                    <th>No Reg</th>
-                    <th>Nama</th>
-                    <th>Alamat</th>
-                    <th>No Tlp</th>
-                    <th>Email</th>
+                    <th>Date</th>
+                    <th>Owner</th>
+                    <th>Pet</th>
+                    <th>Prognosis</th>
+                    <th>Status</th>
+                    <th>Vet</th>
+                    <th>Diagnosis</th>
                     <th></th>
                 </tr>
             </thead>
@@ -69,12 +71,6 @@
             <div class="form-group">
               <label>Klinik</label>
               <div class="form-group">
-                  <select name = "klinik_id" id = "klinik_id" class = "select2">
-                    <option></option>
-                    @foreach($clinic as $c)
-                    <option value = "{{$c->id}}">{{$c->nama_klinik}}</option>
-                    @endforeach
-                  </select>
               </div>
             </div>
 
@@ -138,7 +134,7 @@ $(function() {
       "autoWidth": false,
       "serverSide": true,
       "ajax": {
-            "url": "owner/json",
+            "url": "visit/dt",
             "type": "POST",
             "data": function (d) {
                 d._token = $("input[name=_token]").val();
@@ -149,21 +145,21 @@ $(function() {
       "columnDefs": [
             {
                 render: function (data, type, row) {
-                    return " <p>"+row["kode_pelanggan"]+" </p>";
+                    return " <p>"+row["created_at"]+" </p>";
                 },
                 orderable: true,
                 targets: 0
             },
             {
                 render: function (data, type, row) {
-                    return " <p>"+row["name"]+" </p>";
+                    return " <p>"+row.pet.owner.name+"</p>";
                 },
                 orderable: true,
                 targets: 1
             },
             {
                 render: function (data, type, row) {
-                    return " <p>"+row["alamat"]+" </p>";
+                    return " <p>"+row.pet.name+" </p>";
 
                 },
                 orderable: true,
@@ -171,17 +167,32 @@ $(function() {
             },
             {
                 render: function (data, type, row) {
-                    return " <p>"+row["no_hp"]+" </p>";
+                    return " <p>"+row.prognosis+" </p>";
                 },
                 orderable: true,
                 targets: 3
             },
             {
                 render: function (data, type, row) {
-                   return " <p>"+row["email"]+" </p>";
+                   return " <p>"+row.status+" </p>";
                 },
                 orderable: true,
                 targets: 4
+            },
+            {
+                render: function (data, type, row) {
+                   return " <p> - </p>";
+                },
+                orderable: true,
+                targets: 5
+            },
+
+            {
+                render: function (data, type, row) {
+                   return " <p> - </p>";
+                },
+                orderable: true,
+                targets: 6
             },
             {
                 render: function (data, type, row) {
@@ -193,7 +204,7 @@ $(function() {
                   return d;
                 },
                 orderable: true,
-                targets: 5
+                targets: 7
             },
 
         ],
