@@ -145,7 +145,7 @@ $(function() {
       "columnDefs": [
             {
                 render: function (data, type, row) {
-                    return " <p>"+row["created_at"]+" </p>";
+                    return " <p>"+moment(row.created_date).format('DD-MM-YYYY | HH:mm')+" </p>";
                 },
                 orderable: true,
                 targets: 0
@@ -196,11 +196,9 @@ $(function() {
             },
             {
                 render: function (data, type, row) {
-                  var url = '{{ route("owner-view", ":id") }}';
+                  var url = '{{ route("visit-detail", ":id") }}';
                   url = url.replace(':id', row.id);
-                  var d = '<button type="button" class="btn btn-sm btn-default edit-data" data-id = "'+row.id+'"><i class = "fa fa-edit"></i></button>';
-                  d += '&nbsp; <a href = "'+url+'" class="btn btn-sm btn-info"><i class = "fa fa-eye"></i></a>';
-                  d += '&nbsp; <button type="button" class="btn btn-sm btn-danger delete-data" data-id = "'+row.id+'"><i class = "fa fa-trash"></i></button>';
+                  var d = '<a type="button" class="btn btn-sm btn-default" href = "'+url+'"><i class = "fa fa-microscope"></i></a>';
                   return d;
                 },
                 orderable: true,
@@ -215,99 +213,12 @@ $(function() {
     });
 
     function table_callback(){
-      $('.edit-data').click(function(){
-        var id = $(this).attr('data-id');
-        $.ajax({
-          url: '/owner/detail/'+id,
-          type: 'GET',
-          dataType: 'json',
-          // data: new FormData(this),
-          async: false,
-          success: function (res) {
-            // submitting = false;
-            if(res.status == 200){
-              $('#modal-user-detail').modal('toggle');
-              $('#modal-user-detail #owner_id').val(res.data.id);
-              $("#modal-user-detail #klinik_id").val(res.data.klinik_id).trigger('change');
-              $.each(res.data, function(i,e){
-                var elem = '#'+i;
-                $(elem).val(e);
-              })
-            } else {
-              return false;
-              toastr.danger(res.message);
-            }
-          }
-        });
-      })
-
-      $('.delete-data').click(function(){
-        var id = $(this).attr('data-id');
-
-        toastr.warning("<br /><button type='button' value='yes' class = 'btn btn-success'>Yes</button> &nbsp;<button type='button' class = 'btn btn-danger' value='no' >No</button>",'Are you sure you want to delete this item?',
-        {
-            allowHtml: true,
-            onclick: function (toast) {
-              value = toast.target.value
-              if (value == 'yes') {
-                $.ajax({
-                  url: '/owner/delete/'+id,
-                  type: 'GET',
-                  dataType: 'json',
-                  // data: new FormData(this),
-                  async: false,
-                  success: function (res) {
-                    // submitting = false;
-                    if(res.status == 200){
-                      toastr.success('Data has been deleted.')
-                      var table1 = $("#table2").dataTable();
-                      table1.api().ajax.reload();
-                    } else {
-                      toastr.danger(res.message);
-                    }
-                  }
-                });
-              } else {
-                toastr.clear();
-                toastr.info('Data will not be deleled.')
-              }
-            }
-
-        })
-      })
     }
 
     $('#add-owner').click(function(){
       $('#form_user').trigger('reset');
       $("#modal-user-detail #klinik_id").val('').trigger('change');
       $('#modal-user-detail').modal('show');
-    })
-
-    $('#form_user').submit(function(e){
-      e.preventDefault();
-
-      $.ajax({
-        url: '/owner/save-owner/',
-        type: 'POST',
-        dataType: 'json',
-        data: new FormData(this),
-        processData:false,
-        contentType:false,
-        cache:false,
-        async: false,
-        success: function (res) {
-          // submitting = false;
-          if(res.status == 200){
-            var table1 = $("#table2").dataTable();
-            table1.api().ajax.reload();
-            toastr.success('Data Saved');
-            $('#modal-user-detail').modal('toggle');
-          } else {
-            return false;
-            toastr.danger(res.message);
-          }
-        }
-      });
     })
 });
 </script>

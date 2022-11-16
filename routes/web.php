@@ -60,6 +60,7 @@ Route::post('/pet/datatable', [App\Http\Controllers\PetController::class, 'dtJso
 Route::get('/visit', [App\Http\Controllers\PetVisitController::class, 'visitList']);
 Route::post('/visit/dt', [App\Http\Controllers\PetVisitController::class, 'dtJson']);
 Route::post('/visit/new', [App\Http\Controllers\PetVisitController::class, 'saveNewVisit'])->name('new_visit');
+Route::get('/visit/detail/{id}', [App\Http\Controllers\PetVisitController::class, 'visitDetail'])->name('visit-detail');
 Route::get('/visit/ceki', [App\Http\Controllers\PetVisitController::class, 'cekiData']);
 
 
