@@ -57,6 +57,30 @@ class PetVisitController extends Controller
         exit;
     }
 
+    public function updateVisit(Request $request, $id){
+        $data = $request->all();
+        // dd($data);
+
+        $dt = [
+            'weight' => $data['weight'],
+            'temperature' => $data['temperature'],
+            'diganosis' => $data['diagnosis'],
+            'notes' => $data['notes'],
+            'status' => 'Selesai'
+        ];
+
+        try{
+            $visit = PetVisit::find($id);
+            $visit->update($dt);
+            return redirect()->intended('visit');
+        } catch(QueryException $e){
+            $response = [
+                'status' => 400,
+                'message' => $e->errorInfo
+            ];
+        }
+    }
+
     #understanding eloquent relation
     public function cekiData(){
         $data = PetVisit::with(['pet.owner'])->get();

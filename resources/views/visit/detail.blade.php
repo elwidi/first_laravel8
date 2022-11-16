@@ -24,7 +24,7 @@
       <!-- Administration - Start !-->
       <div class="col-md-12">
         <div class="card card-primary">
-          <form role="form" id = "form_update_visit" method="POST">
+          <form role="form" id = "form_update_visit" method="POST" action = "{{route('update-visit', $visit->id)}}">
           <div class="card-body">
             @csrf
             <div class = "row">
@@ -84,46 +84,11 @@
 @push('scripts')
 <script>
   $(function() {
-    $('.pet_detail').click(function(e){
-      $('#modal-pet-detail').modal('show');
-      var petId = $(this).attr('data-pet-id');
-      $.ajax({
-        url: '/pet/detail_ajax/'+petId,
-        type: 'GET',
-        dataType: 'json',
-        async: false,
-        success: function (res) {
-          if(res.status == 200){
-            $('#show_detail_name').html(res.data.name);
-          }
-        }
-      })
-    })
-
-    $('.new-visit').click(function(e){
-      $('#modal-new-visit').modal('show');
-      var petId = $(this).attr('data-pet-id');
-      $.ajax({
-        url: '/pet/detail_ajax/'+petId,
-        type: 'GET',
-        dataType: 'json',
-        async: false,
-        success: function (res) {
-          if(res.status == 200){
-            $('#modal-new-visit #pet_id').val(res.data.id);
-            $('#modal-new-visit #pet_name').val(res.data.name);
-            $('#modal-new-visit #owner_id').val(res.data.owner_id);
-            $('#modal-new-visit #owner_name').val(res.data.owner_name);
-          }
-        }
-      })
-    })
-
     $('#form_new_visit').submit(function(e){
       e.preventDefault();
       var form = $(this);
       $.ajax({
-        url: '/visit/new/',
+        url: '/visit/update/',
         type: 'POST',
         dataType: 'json',
         data:form.serialize(),
