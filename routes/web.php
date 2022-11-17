@@ -57,7 +57,7 @@ Route::get('/pet/detail_ajax/{id}', [App\Http\Controllers\PetController::class, 
 Route::post('/pet/datatable', [App\Http\Controllers\PetController::class, 'dtJson']);;
 
 #pet visit module routes
-Route::get('/visit', [App\Http\Controllers\PetVisitController::class, 'visitList']);
+Route::get('/visit', [App\Http\Controllers\PetVisitController::class, 'visitList'])->name('visit');
 Route::post('/visit/dt', [App\Http\Controllers\PetVisitController::class, 'dtJson']);
 Route::post('/visit/new', [App\Http\Controllers\PetVisitController::class, 'saveNewVisit'])->name('new_visit');
 Route::get('/visit/detail/{id}', [App\Http\Controllers\PetVisitController::class, 'visitDetail'])->name('visit-detail');

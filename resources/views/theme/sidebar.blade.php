@@ -28,6 +28,11 @@
           </li>
 
           <li class="nav-item">
+            <a href="{{route('visit')}}" class="nav-link">
+            <i class="nav-icon fas fa-notes-medical"></i> Visit</a>
+          </li>
+
+          <li class="nav-item">
             <a href="{{route('signout')}}" class="nav-link">
             <i class="nav-icon fas fa-sign-out-alt"></i> Logout</a>
           </li>

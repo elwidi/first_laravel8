@@ -6,7 +6,8 @@ use Session;
 use Redirect;
 use DataTables;
 use App\Models\PetVisit;
-use App\Models\Vet;
+// use App\Models\Vet;
+use App\Models\BillItem;
 use Illuminate\Http\Request;
 Use Illuminate\Database\QueryException;
 
@@ -25,14 +26,17 @@ class PetVisitController extends Controller
     }
 
     public function visitList(){
-        $vet = Vet::all();
-        return view('visit.visitList', array('vet' => $vet));
+        // $vet = Vet::all();
+        return view('visit.visitList');
     }
 
     public function visitDetail($id){
         $data['visit'] = PetVisit::with(['pet.owner'])->find($id);
         $data['pet'] = $data['visit']->pet;
         $data['owner'] = $data['visit']->pet->owner;
+
+        $data['bill_item'] = BillItem::all(); 
+
         return view('visit.detail', $data);
     }
 

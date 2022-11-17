@@ -27,7 +27,7 @@
           <form role="form" id = "form_update_visit" method="POST" action = "{{route('update-visit', $visit->id)}}">
           <div class="card-body">
             @csrf
-            <div class = "row">
+              <div class = "row">
                 <div class = "col-md-6">
                     <div class="form-group">
                         <label for="inputName">Owner</label>
@@ -41,13 +41,6 @@
                         <label for="inputName">Prognosis</label>
                         <textarea class = "form-control" disabled>{{$visit->prognosis}}</textarea>
                     </div>
-                    <!-- <div class="form-group">
-                        <label for="inputName">notes</label>
-                        <textarea class = "form-control" rows = '4'></textarea>
-                    </div> -->
-                </div>
-
-                <div class = "col-md-6">
                     <div class="form-group">
                         <label for="inputName">Suhu</label>
                         <input type="text" class="form-control" id = "temperature" name = "temperature">
@@ -64,8 +57,28 @@
                         <label for="inputName">Additional Notes</label>
                         <textarea class = "form-control" id = "notes" name = "notes" rows = '4'></textarea>
                     </div>
+                    <!-- <div class="form-group">
+                        <label for="inputName">notes</label>
+                        <textarea class = "form-control" rows = '4'></textarea>
+                    </div> -->
                 </div>
-            </div>
+
+                <!-- <div class = "col-md-6">
+                    
+                </div> -->
+                <div class = "col-md-6">
+                    <table class = "table table-condensed">
+                      <thead>
+                        <tr>
+                          <th></th>
+                          <th>Item</th>
+                          <th>Qty</th>
+                          <th>Notes</th>
+                        </tr>
+                      </thead>
+                    </table>
+                </div>
+              </div>
           </div>
           <!-- /.card-body -->
           <div class="card-footer justify-content-between">
